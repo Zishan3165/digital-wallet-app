@@ -45,11 +45,7 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
   const [errorMessage, setErrorMessage] = useState("");
   const clearError = () => setErrorMessage("");
 
-  const [wallet, setWallet] = useState<WalletState>(
-    window.localStorage?.getItem("wallet")
-      ? JSON.parse(window.localStorage?.getItem("wallet") || "")
-      : disconnectedState
-  );
+  const [wallet, setWallet] = useState<WalletState>(disconnectedState);
 
   // useCallback ensures that we don't uselessly re-create the _updateWallet function on every render
   const _updateWallet = useCallback(async (providedAccounts?: any) => {
@@ -60,7 +56,7 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
     if (accounts.length === 0) {
       // If there are no accounts, then the user is disconnected
       setWallet(disconnectedState);
-      window.localStorage?.setItem("wallet", JSON.stringify(wallet));
+      localStorage?.setItem("wallet", JSON.stringify(wallet));
       return;
     }
 
@@ -76,7 +72,7 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
 
     setWallet({ accounts, balance, chainId: chainId as string });
 
-    window.localStorage?.setItem(
+    localStorage?.setItem(
       "wallet",
       JSON.stringify({ accounts, balance, chainId: chainId as string })
     );
@@ -90,6 +86,17 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
     (accounts: any) => _updateWallet(accounts),
     [_updateWallet]
   );
+
+  useEffect(() => {
+    try {
+      const storedWalletString = localStorage.getItem("wallet");
+      if (storedWalletString != null) {
+        setWallet(JSON.parse(storedWalletString));
+      }
+    } catch (e) {
+      console.debug(e);
+    }
+  }, []);
 
   /**
    * This logic checks if MetaMask is installed. If it is, then we setup some
