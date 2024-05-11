@@ -1,6 +1,8 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { MetaMaskContextProvider } from "@/contexts/useMetaMaskContext";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,16 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <MetaMaskContextProvider>{children} </MetaMaskContextProvider>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
