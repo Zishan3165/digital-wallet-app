@@ -11,3 +11,12 @@ export const formatChainAsNum = (chainIdHex: string) => {
 export const formatAddress = (addr: string) => {
   return `${addr.substring(0, 8)}...`;
 };
+
+export function removeTimeFromDate(dateTimeString: string) {
+  const date = new Date(dateTimeString);
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1; // Month is zero-based
+  const day = date.getDate();
+
+  return `${year}-${month < 10 ? "0" + month : month}-${day < 10 ? "0" + day : day}`;
+}

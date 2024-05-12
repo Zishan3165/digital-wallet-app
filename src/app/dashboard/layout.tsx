@@ -9,7 +9,7 @@ export default function RootLayout({
   return (
     <>
       <Navbar />
-      {children}
+      <div className="max-w-screen-xl m-auto p-4">{children}</div>
     </>
   );
 }

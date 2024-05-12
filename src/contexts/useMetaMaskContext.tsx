@@ -38,17 +38,30 @@ const MetaMaskContext = createContext<MetaMaskContextData>(
 );
 
 export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
+  const parseWalletFromLocalStorage = () => {
+    if (typeof window === "undefined") return;
+    try {
+      const storedWallet = JSON.parse(
+        window.localStorage.getItem("wallet") || ""
+      );
+      return storedWallet || disconnectedState;
+    } catch (error) {
+      console.error("Error parsing wallet from local storage:", error);
+      return disconnectedState;
+    }
+  };
   const [hasProvider, setHasProvider] = useState<boolean | null>(null);
 
-  const [isConnecting, setIsConnecting] = useState(false);
+  const [isConnecting, setIsConnecting] = useState(true);
 
   const [errorMessage, setErrorMessage] = useState("");
   const clearError = () => setErrorMessage("");
 
-  const [wallet, setWallet] = useState<WalletState>(disconnectedState);
+  const [wallet, setWallet] = useState(parseWalletFromLocalStorage());
 
   // useCallback ensures that we don't uselessly re-create the _updateWallet function on every render
   const _updateWallet = useCallback(async (providedAccounts?: any) => {
+    setIsConnecting(true);
     if (!window.ethereum) return;
     const accounts =
       providedAccounts ||
@@ -57,6 +70,7 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
       // If there are no accounts, then the user is disconnected
       setWallet(disconnectedState);
       localStorage?.setItem("wallet", JSON.stringify(wallet));
+      setIsConnecting(false);
       return;
     }
 
@@ -71,6 +85,7 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
     });
 
     setWallet({ accounts, balance, chainId: chainId as string });
+    setIsConnecting(false);
 
     localStorage?.setItem(
       "wallet",

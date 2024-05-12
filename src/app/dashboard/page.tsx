@@ -1,11 +1,15 @@
-"use client";
 import ProtectedRoutes from "@/components/ProtectedRoutes";
 import React from "react";
+import NewsList from "./newsList";
+import { getNews } from "./getNews";
 
-export default function DashboardPage() {
+export default async function DashboardPage() {
+  const initialNewsList = await getNews(1, 10);
   return (
     <ProtectedRoutes>
-      <div>Dashboard Page</div>
+      <div>
+        <NewsList initialList={initialNewsList} />
+      </div>
     </ProtectedRoutes>
   );
 }

@@ -11,10 +11,23 @@ import { Button } from "@/components/ui/button";
 import { useMetaMask } from "@/contexts/useMetaMaskContext";
 import { RedirectType, redirect } from "next/navigation";
 import { WalletIcon } from "lucide-react";
+import dynamic from "next/dynamic";
+
+const LoaderAnimation = dynamic(
+  () => import("@/components/ui/Loader/LoaderAnimation"),
+  {
+    ssr: false,
+  }
+);
 
 export default function SignInPage() {
-  const { connectMetaMask, wallet } = useMetaMask();
-  if (wallet.chainId) {
+  const { connectMetaMask, wallet, isConnecting } = useMetaMask();
+
+  if (isConnecting) {
+    return <LoaderAnimation />;
+  }
+
+  if (wallet?.chainId) {
     redirect("/dashboard", RedirectType.replace);
   }
   return (

@@ -12,10 +12,16 @@ import { UserIcon, WalletIcon } from "lucide-react";
 import Link from "next/link";
 import { ToggleThemeButton } from "./ToggleThemeButton";
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
   const { disconnect } = useMetaMask();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActiveLink = (href: string) => {
+    return pathname === href;
+  };
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -65,16 +71,23 @@ export default function Navbar() {
             <li className="m-auto">
               <Link
                 href={"/dashboard"}
-                className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500"
-                aria-current="page"
+                className={`block py-2 px-3 text-white rounded md:p-0 dark:text-white  ${
+                  isActiveLink("/dashboard")
+                    ? "md:dark:text-blue-500"
+                    : "md:dark:text-white"
+                }`}
               >
                 Home
               </Link>
             </li>
             <li className="m-auto">
               <Link
-                href={"/about"}
-                className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                href={"/dashboard/about"}
+                className={`block py-2 px-3 text-white rounded md:p-0 dark:text-white  ${
+                  isActiveLink("/dashboard/about")
+                    ? "md:dark:text-blue-500"
+                    : "md:dark:text-white"
+                }`}
               >
                 About
               </Link>
