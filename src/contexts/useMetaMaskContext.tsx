@@ -129,6 +129,7 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
         window.ethereum?.on("accountsChanged", updateWallet);
         window.ethereum?.on("chainChanged", updateWalletAndAccounts);
       }
+      setIsConnecting(false);
     };
 
     getProvider();
@@ -140,6 +141,9 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
   }, [updateWallet, updateWalletAndAccounts]);
 
   const connectMetaMask = async () => {
+    if (!hasProvider) {
+      window.alert("Please install MetaMask extension");
+    }
     setIsConnecting(true);
     try {
       const accounts = await window.ethereum?.request({
@@ -164,6 +168,7 @@ export const MetaMaskContextProvider = ({ children }: PropsWithChildren) => {
         ],
       });
       clearError();
+      setIsConnecting(false);
     } catch (e) {
       console.debug(e);
     }
