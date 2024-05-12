@@ -1,7 +1,5 @@
-import ProtectedRoutes from "@/components/ProtectedRoutes";
 import React from "react";
-import NewsList from "./newsList";
-import { getNews } from "./getNews";
+import { getNewsAction } from "./getNewsAction";
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "lucide-react";
 import {
@@ -11,26 +9,25 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import NewsForm from "./NewsForm";
+import NewsList from "./NewsList";
+import { INITIAL_PAGE, PAGE_SIZE } from "./utils";
 
 export default async function DashboardPage() {
-  const initialNewsList = await getNews(1, 10);
+  const initialNewsList = await getNewsAction(INITIAL_PAGE, PAGE_SIZE);
   return (
-    <ProtectedRoutes>
+    <>
       <Dialog>
         <DialogTrigger asChild>
           <Button className="flex justify-center m-auto">
-            <PlusIcon /> Add Article
+            <PlusIcon /> Add News
           </Button>
         </DialogTrigger>
         <DialogContent className="">
-          <DialogTitle>Create News</DialogTitle>
+          <DialogTitle>Add News</DialogTitle>
           <NewsForm />
         </DialogContent>
       </Dialog>
-
-      <div>
-        <NewsList initialList={initialNewsList} />
-      </div>
-    </ProtectedRoutes>
+      <NewsList initialList={initialNewsList} />
+    </>
   );
 }

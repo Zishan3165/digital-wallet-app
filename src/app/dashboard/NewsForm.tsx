@@ -15,7 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "@/components/ui/use-toast";
 import { Textarea } from "@/components/ui/textarea";
-import { News } from "./getNews";
+import { News } from "./utils";
 
 const FormSchema = z.object({
   author: z.string(),

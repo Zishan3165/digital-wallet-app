@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardTitle } from "@/components/ui/card";
-import { removeTimeFromDate } from "@/utils";
 import {
   Dialog,
   DialogTrigger,
@@ -13,6 +12,7 @@ import Image from "next/image";
 import React from "react";
 import NewsForm from "./NewsForm";
 import { toast } from "@/components/ui/use-toast";
+import { removeTimeFromDate } from "@/lib/utils";
 
 type NewsItemProps = {
   src: string;
@@ -87,7 +87,7 @@ export default function NewsItem({
               <Pencil />
             </Button>
           </DialogTrigger>
-          <DialogContent className="">
+          <DialogContent>
             <DialogTitle>Edit News</DialogTitle>
             <NewsForm
               article={{
@@ -108,7 +108,7 @@ export default function NewsItem({
               <TrashIcon />
             </Button>
           </DialogTrigger>
-          <DialogContent className="">
+          <DialogContent>
             <DialogTitle>Confirm</DialogTitle>
             Are you sure you want to delete this news?
             <DialogFooter>

@@ -1,11 +1,9 @@
 "use client";
 import { useState } from "react";
-import { News, getNews } from "./getNews";
+import { getNewsAction } from "./getNewsAction";
 import NewsItem from "./NewsItem";
 import { Button } from "@/components/ui/button";
-
-const PAGE_SIZE = 10;
-const INITIAL_PAGE = 2;
+import { INITIAL_PAGE, News, PAGE_SIZE } from "./utils";
 
 type NewsListProps = {
   initialList: News[];
@@ -18,7 +16,7 @@ export default function NewsList({ initialList }: NewsListProps) {
 
   const loadMoreNews = async () => {
     if (hasMoreData) {
-      const apiNewsList = await getNews(page, PAGE_SIZE);
+      const apiNewsList = await getNewsAction(page, PAGE_SIZE);
       if (apiNewsList.length == 0) {
         setHasMoreData(false);
       }
@@ -28,7 +26,7 @@ export default function NewsList({ initialList }: NewsListProps) {
   };
 
   return (
-    <div className="">
+    <div>
       {newsList.map((article) => (
         <NewsItem
           key={article.url}

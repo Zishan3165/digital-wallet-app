@@ -1,23 +1,8 @@
 "use server";
 import { z } from "zod";
 import { createZodFetcher } from "zod-fetch";
-
-const apiKey = process.env.API_KEY;
-
-export type NewsApiResponse = {
-  status: string;
-  totalResults: number;
-  articles: News[];
-};
-
-export type News = {
-  author: string | null;
-  title: string;
-  content: string;
-  publishedAt: string;
-  urlToImage: string | null;
-  url: string;
-};
+import { News } from "./utils";
+import { apiKey } from "@/lib/utils";
 
 const NewsSchema = z.object({
   author: z.string().nullable(),
@@ -36,7 +21,10 @@ const NewsApiResponseSchema = z.object({
 
 const fetchWithZod = createZodFetcher();
 
-export const getNews = async (page: number, size: number): Promise<News[]> => {
+export const getNewsAction = async (
+  page: number,
+  size: number
+): Promise<News[]> => {
   const url = `https://newsapi.org/v2/everything?q=usdc&apiKey=${apiKey}&page=${page}&pageSize=${size}&sortBy=publishedAt`;
 
   try {
@@ -44,6 +32,6 @@ export const getNews = async (page: number, size: number): Promise<News[]> => {
     return response.articles;
   } catch (error: unknown) {
     console.error(error);
-    throw new Error(`An error occurred: ${error}`);
+    return [];
   }
 };
