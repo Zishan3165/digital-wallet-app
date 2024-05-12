@@ -31,7 +31,7 @@ export default function SignInPage() {
     redirect("/dashboard", RedirectType.replace);
   }
   return (
-    <div className="min-h-screen flex justify-center items-center flex-col">
+    <main className="min-h-screen flex justify-center items-center flex-col">
       <Card className="mx-auto my-auto max-w-md space-y-6 p-4 m-4 min-w-[300px]">
         <div className="flex gap-1 justify-center">
           <WalletIcon className="h-8 w-8" />
@@ -51,6 +51,6 @@ export default function SignInPage() {
           </Button>
         </CardContent>
       </Card>
-    </div>
+    </main>
   );
 }

@@ -4,6 +4,7 @@ import { getNewsAction } from "./getNewsAction";
 import NewsItem from "./NewsItem";
 import { Button } from "@/components/ui/button";
 import { INITIAL_PAGE, News, PAGE_SIZE } from "./utils";
+import React from "react";
 
 type NewsListProps = {
   initialList: News[];
@@ -26,7 +27,7 @@ export default function NewsList({ initialList }: NewsListProps) {
   };
 
   return (
-    <div>
+    <>
       {newsList.map((article) => (
         <NewsItem
           key={article.url}
@@ -46,6 +47,6 @@ export default function NewsList({ initialList }: NewsListProps) {
           Load More Posts
         </Button>
       ) : null}
-    </div>
+    </>
   );
 }

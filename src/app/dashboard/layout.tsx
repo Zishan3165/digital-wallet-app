@@ -10,7 +10,7 @@ export default function RootLayout({
   return (
     <ProtectedRoutes>
       <Navbar />
-      <div className="max-w-screen-xl m-auto p-4">{children}</div>
+      <main className="max-w-screen-xl m-auto p-4">{children}</main>
     </ProtectedRoutes>
   );
 }
