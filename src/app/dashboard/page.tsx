@@ -16,7 +16,7 @@ export default async function DashboardPage() {
   const initialNewsList = await getNews(1, 10);
   return (
     <ProtectedRoutes>
-      <Dialog modal>
+      <Dialog>
         <DialogTrigger asChild>
           <Button className="flex justify-center m-auto">
             <PlusIcon /> Add Article

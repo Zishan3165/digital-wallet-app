@@ -71,10 +71,10 @@ export default function Navbar() {
             <li className="m-auto">
               <Link
                 href={"/dashboard"}
-                className={`block py-2 px-3 text-white rounded md:p-0 dark:text-white  ${
+                className={`block py-2 px-3 rounded md:p-0 ${
                   isActiveLink("/dashboard")
-                    ? "md:dark:text-blue-500"
-                    : "md:dark:text-white"
+                    ? "text-blue-500 dark:text-white"
+                    : "text-gray-800 dark:text-gray-400"
                 }`}
               >
                 Home
@@ -83,10 +83,10 @@ export default function Navbar() {
             <li className="m-auto">
               <Link
                 href={"/dashboard/about"}
-                className={`block py-2 px-3 text-white rounded md:p-0 dark:text-white  ${
+                className={`block py-2 px-3 rounded md:p-0 ${
                   isActiveLink("/dashboard/about")
-                    ? "md:dark:text-blue-500"
-                    : "md:dark:text-white"
+                    ? "text-blue-500 dark:text-white"
+                    : "text-gray-800 dark:text-gray-400"
                 }`}
               >
                 About
@@ -106,8 +106,6 @@ export default function Navbar() {
                   </Avatar>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent>
-                  <DropdownMenuItem>Profile</DropdownMenuItem>
-                  <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={() => disconnect()}>
                     Logout
                   </DropdownMenuItem>

@@ -29,7 +29,7 @@ export default function AboutPage() {
             <p className="text-gray-500 dark:text-gray-400">
               Chain Id : {wallet.chainId}
             </p>
-            <p className="text-gray-500 dark:text-gray-400">
+            <p className="text-gray-500 dark:text-gray-400 break-all">
               Account Address: {wallet.accounts[0]}
             </p>
           </div>

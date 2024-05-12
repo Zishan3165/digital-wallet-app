@@ -74,13 +74,13 @@ export default function NewsForm({ article }: { article?: News }) {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(article ? onEdit : onCreate)}
-        className="space-y-8"
+        className="w-full"
       >
         <FormField
           control={form.control}
           name="author"
           render={({ field }) => (
-            <FormItem>
+            <FormItem className="w-full">
               <FormLabel>Author</FormLabel>
               <FormControl>
                 <Input {...field} />
@@ -141,7 +141,7 @@ export default function NewsForm({ article }: { article?: News }) {
             </FormItem>
           )}
         />
-        <Button type="submit" className="w-full">
+        <Button type="submit" className="w-full my-3">
           Submit
         </Button>
       </form>
