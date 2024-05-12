@@ -9,8 +9,8 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import NewsForm from "./NewsForm";
-import NewsList from "./NewsList";
 import { INITIAL_PAGE, PAGE_SIZE } from "./utils";
+import NewsList from "./NewsList";
 
 export default async function DashboardPage() {
   const initialNewsList = await getNewsAction(INITIAL_PAGE, PAGE_SIZE);

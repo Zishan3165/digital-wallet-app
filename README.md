@@ -54,3 +54,11 @@ Start the server
 - react-lottie for json based animation
 - @metamask/sdk for integrating MetaMask
 - react-window, react-window-infinite-loader for virtualization (not implemented yet)
+
+## Future Work/Improvements
+
+- Add news Api (Currently not available)
+- Edit news Api (Currently not available)
+- Delete news API (Currently not available)
+- Virtualization of news using react-window
+- Infinite scroll instead of button using react-window-infinite-loader
