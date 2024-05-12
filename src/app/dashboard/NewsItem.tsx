@@ -8,9 +8,11 @@ import {
   DialogTitle,
   DialogFooter,
 } from "@/components/ui/dialog";
-import { Delete, DeleteIcon, ImageIcon, Pencil, TrashIcon } from "lucide-react";
+import { ImageIcon, Pencil, TrashIcon } from "lucide-react";
 import Image from "next/image";
 import React from "react";
+import NewsForm from "./NewsForm";
+import { toast } from "@/components/ui/use-toast";
 
 type NewsItemProps = {
   src: string;
@@ -29,6 +31,20 @@ export default function NewsItem({
   time,
   newsLink,
 }: NewsItemProps) {
+  const handleDelete = () => {
+    // TODO: Implement API to handle deletion (currently not available)
+    try {
+      toast({
+        title: "News deleted successfully",
+      });
+    } catch (e) {
+      console.log(e);
+      toast({
+        title: "Failed to delete news",
+        variant: "destructive",
+      });
+    }
+  };
   return (
     <Card className="w-full max-w-[800px] my-3 relative mx-auto">
       {src && (
@@ -65,9 +81,26 @@ export default function NewsItem({
         <p className="text-sm leading-relaxed">{content}</p>
       </CardContent>
       <CardFooter className="flex justify-end gap-2">
-        <Button variant="default">
-          <Pencil />
-        </Button>
+        <Dialog modal>
+          <DialogTrigger asChild>
+            <Button variant="default">
+              <Pencil />
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="">
+            <DialogTitle>Edit News</DialogTitle>
+            <NewsForm
+              article={{
+                author,
+                content,
+                url: newsLink,
+                title,
+                urlToImage: src,
+                publishedAt: time,
+              }}
+            />
+          </DialogContent>
+        </Dialog>
 
         <Dialog modal>
           <DialogTrigger asChild>

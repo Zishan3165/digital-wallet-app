@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { MetaMaskContextProvider } from "@/contexts/useMetaMaskContext";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import NetworkProvider from "@/components/NetworkProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,14 +21,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <MetaMaskContextProvider>{children} </MetaMaskContextProvider>
-        </ThemeProvider>
+        <NetworkProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <MetaMaskContextProvider>{children} </MetaMaskContextProvider>
+          </ThemeProvider>
+          <Toaster />
+        </NetworkProvider>
       </body>
     </html>
   );
