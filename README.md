@@ -6,7 +6,7 @@ A simple Web app (using NextJs v14)
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`API_KEY` : `e040ec22ef2d4681bdc3e3cbba52c074`
+`API_KEY` from https://newsapi.org/
 
 # Demo
 
