@@ -54,6 +54,7 @@ Start the server
 - react-lottie for json based animation
 - @metamask/sdk for integrating MetaMask
 - react-window, react-window-infinite-loader for virtualization (not implemented yet)
+- jest/testing-library for testing
 
 ## Future Work/Improvements
 
@@ -62,3 +63,4 @@ Start the server
 - Delete news API (Currently not available)
 - Virtualization of news using react-window
 - Infinite scroll instead of button using react-window-infinite-loader
+- Add more tests
