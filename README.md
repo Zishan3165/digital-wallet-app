@@ -10,7 +10,7 @@ To run this project, you will need to add the following environment variables to
 
 # Demo
 
-https://digital-wallet-app.vercel.app/
+https://digital-wallet-app.vercel.app/ or https://digital-wallet-5ooh2kyx2-zishans-projects-87457693.vercel.app/
 
 ## Features
 
